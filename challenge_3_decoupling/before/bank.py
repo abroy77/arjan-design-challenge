@@ -4,8 +4,6 @@ from stripe_service import StripePaymentService
 from typing import Union
 
 
-
-
 @dataclass
 class SavingsAccount:
     account_number: str
