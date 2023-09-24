@@ -1,17 +1,13 @@
-from collections import Counter
-def count_fruits(fruits: list[str]) -> dict[str, int]:
+from typing import List, Dict
 
-    # get unique elements of a list
-    unique_fruits = set(fruits)
-    # count the number of occurrences of each element
-    fruit_count = {fruit: fruits.count(fruit) for fruit in unique_fruits}
-    return fruit_count
 
-def count_fruits_arjan(fruits: list[str]) -> dict[str, int]:
-    return Counter(fruits)
+def count_fruits(fruits: List[str]) -> Dict[str, int]:
+    # your code goes here
+    pass
+
 
 def main() -> None:
-    assert count_fruits_arjan(
+    assert count_fruits(
         [
             "apple",
             "banana",
@@ -26,10 +22,8 @@ def main() -> None:
             "cherry",
         ]
     ) == {"apple": 4, "banana": 3, "cherry": 4}
-    assert count_fruits_arjan([]) == {}
+    assert count_fruits([]) == {}
     # add more tests
-    assert count_fruits_arjan(["apple", "apple"]) == {"apple": 2}
-    print('tests passed')
 
 
 if __name__ == "__main__":
