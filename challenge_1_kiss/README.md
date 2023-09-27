@@ -11,7 +11,7 @@ After completing the function, write tests to ensure that it's working correctly
 
 After you've completed the tasks, reflect on your solution and ask yourself the following questions:
 
-Is your solution as simple as it could be, or is there a simpler approach?
-Does your solution use language features and constructs appropriately and effectively?
+* Is your solution as simple as it could be, or is there a simpler approach?
+* Does your solution use language features and constructs appropriately and effectively?
 ### Resources
 [KISS principle (Wikipedia)](https://en.wikipedia.org/wiki/KISS_principle)

@@ -23,6 +23,6 @@ Pizza       $  11.90      5     $  59.50
 Total: $ 78.50
 The exact number of spaces between each column is not important. However, the dollar signs as well as the prices need to be correctly aligned.
 
-Resources
-[PEP 498 (f-strings)](https://peps.python.org/pep-0498/)
-My [video](https://youtu.be/Mfmr_Puhtew) about f-strings
+### Resources
+* [PEP 498 (f-strings)](https://peps.python.org/pep-0498/)
+* My [video](https://youtu.be/Mfmr_Puhtew) about f-strings

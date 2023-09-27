@@ -7,16 +7,16 @@ The aim of this challenge is to modify the code so that we can add additional pa
 
 Modify the code so that you can add more payment methods by going through these simple steps:
 
-Create a new Python script containing the code for the payment method that you'd like to add.
-Put the script in a dedicated plugins folder.
-Now run `main.py` - it should recognize the new payment method in the plugins folder and make it available automatically to the user.
+* Create a new Python script containing the code for the payment method that you'd like to add.
+* Put the script in a dedicated plugins folder.
+* Now run `main.py` - it should recognize the new payment method in the plugins folder and make it available automatically to the user.
 That's it!
 
 Once you've refactored the code so that it supports a plugin interface, test it by creating a new payment method and verify that you can use it without having to change anything in the rest of the code.
 
 Hints
-You can use `importlib` to dynamically load Python scripts and you can use `os.walk` to retrieve the files in a particular folder.
-Feel free to split things up into separate files. For example, you could create a separate file that manages loading and getting access to the plugins, so your `main.py` file remains relatively small.
+* You can use `importlib` to dynamically load Python scripts and you can use `os.walk` to retrieve the files in a particular folder.
+* Feel free to split things up into separate files. For example, you could create a separate file that manages loading and getting access to the plugins, so your `main.py` file remains relatively small.
 
 ### Resources
 Check out this [video](https://youtu.be/iCE1bDoit9Q) for an idea of how to approach this problem.

@@ -5,5 +5,5 @@ In simpler words, this law states that an object should only communicate with it
 
 A typical violation of the law is that one object directly interacts with an instance variable of another object. The code belonging to this challenge has several violations of the Law of Demeter. Refactor the code to remove these violations.
 
-Resources
-[Law of Demeter (Wikipedia)](https://en.wikipedia.org/wiki/Law_of_Demeter)
+### Resources
+* [Law of Demeter (Wikipedia)](https://en.wikipedia.org/wiki/Law_of_Demeter)

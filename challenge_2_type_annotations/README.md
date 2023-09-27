@@ -11,8 +11,9 @@ Once you've done that and you open the `before.py` file, you should see a bunch 
 
 The challenge is to write the type annotations so that:
 
-All type errors identified by the IDE are gone
-The type annotations are a generic as possible - in other words, the type annotations shouldn't impose any extra limitations on how you can use the functions
+* All type errors identified by the IDE are gone
+* The type annotations are a generic as possible - in other words, the type annotations shouldn't impose any extra limitations on how you can use the functions
+
 You're not allowed to use the Any type in this challenge. You can make minor modifications to the code if needed. However, the functionality should stay the same and you're not allowed to change things like function arguments and return types.
 
 ### Resources

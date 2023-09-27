@@ -8,5 +8,5 @@ The example code allows you to pay by credit card, PayPal or Apple Pay. This is 
 For this challenge you need to refactor this code and use the Strategy pattern to remove the coupling between the shopping cart and the different payment methods. You don't have to follow the pattern exactly by the book, you can also use a variety of the pattern, as long as it accurately removes the coupling.
 
 #### Resources
-[Strategy design pattern (Wikipedia)](https://en.wikipedia.org/wiki/Strategy_pattern)
-My [video](https://youtu.be/WQ8bNdxREHU) about the Strategy design pattern, and a [follow-up](https://youtu.be/n2b_Cxh20Fw).
+* [Strategy design pattern (Wikipedia)](https://en.wikipedia.org/wiki/Strategy_pattern)
+* My [video](https://youtu.be/WQ8bNdxREHU) about the Strategy design pattern, and a [follow-up](https://youtu.be/n2b_Cxh20Fw).
