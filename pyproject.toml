@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "arjan-design-challenge"
+version = "0.1.0"
+description = "package for working through the challenges in Arjan's 30 day software design challenge"
+authors = ["Abhishek Roy <royabhishek77@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+numpy = "^1.26.0"
+pandas = "^2.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
