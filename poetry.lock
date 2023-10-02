@@ -111,6 +111,20 @@ files = [
 ]
 
 [[package]]
+name = "faker"
+version = "19.6.2"
+description = "Faker is a Python package that generates fake data for you."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "Faker-19.6.2-py3-none-any.whl", hash = "sha256:8fba91068dc26e3159c1ac9f22444a2338704b0991d86605322e454bda420092"},
+    {file = "Faker-19.6.2.tar.gz", hash = "sha256:d5d5953556b0fb428a46019e03fc2d40eab2980135ddef5a9eb3d054947fdf83"},
+]
+
+[package.dependencies]
+python-dateutil = ">=2.4"
+
+[[package]]
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -318,4 +332,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "fe3bee1706260f2432de9b5d6be9509627e7cda878eb0646046409c5767d20e5"
+content-hash = "02bef13bc43992745a3d9cf3552385057b515c35a2f8a4f2409b113d740a4dbe"
