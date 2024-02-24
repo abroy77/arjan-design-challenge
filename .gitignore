@@ -161,3 +161,8 @@ cython_debug/
 
 *.zip
 .vscode/
+
+# any db files
+*.db
+
+.DS_Store
