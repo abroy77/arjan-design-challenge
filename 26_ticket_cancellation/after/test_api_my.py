@@ -3,7 +3,7 @@ from main import app, get_db
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, StaticPool
 from sqlalchemy.orm import sessionmaker
-from models import Base, Event
+from models import Base, Event, Ticket
 import datetime
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
@@ -31,8 +31,8 @@ def test_db_with_event():
             id=1,
             title="Test event",
             location="Test location",
-            start_date=datetime.datetime(2023, 9, 22, 12, 0, 0),
-            end_date=datetime.datetime(2023, 9, 22, 14, 0, 0),
+            start_date=datetime.datetime(2025, 9, 22, 12, 0, 0),
+            end_date=datetime.datetime(2025, 9, 22, 14, 0, 0),
             available_tickets=100,
         
         )
@@ -56,8 +56,8 @@ def test_db_with_no_ticket():
             id=1,
             title="Sold out event",
             location="popular venue",
-            start_date=datetime.datetime(2023, 9, 22, 12, 0, 0),
-            end_date=datetime.datetime(2023, 9, 22, 14, 0, 0),
+            start_date=datetime.datetime(2025, 9, 22, 12, 0, 0),
+            end_date=datetime.datetime(2025, 9, 22, 14, 0, 0),
             available_tickets=0,
         
         )
@@ -65,7 +65,30 @@ def test_db_with_no_ticket():
         db.commit()
         db.refresh(event)
 
+@pytest.fixture()
+def test_db_with_event_and_1_ticket_sold():
 
+    Base.metadata.create_all(bind=engine)
+    with TestingSessionLocal() as db:
+        event = Event(
+            id=1,
+            title="Test event",
+            location="Test location",
+            start_date=datetime.datetime(2025, 9, 22, 12, 0, 0),
+            end_date=datetime.datetime(2025, 9, 22, 14, 0, 0),
+            available_tickets=99,        
+        )
+        ticket = Ticket(
+            id=1,
+            event_id=1,
+            customer_name="Test customer",
+            customer_email="test@testy.com",
+        )
+        db.add(event)
+        db.add(ticket)
+        db.commit()
+        db.refresh(event)
+        db.refresh(ticket)
     
     yield
 
@@ -88,8 +111,8 @@ def test_create_event() -> None:
     event_data = {
         "title": "Test event",
         "location": "Test location",
-        "start_date": "2023-09-22 12:00:00",
-        "end_date": "2023-09-22 14:00:00",
+        "start_date": "2025-09-22 12:00:00",
+        "end_date": "2025-09-22 14:00:00",
         "available_tickets": 100,
     }
     response = client.post("/events", json=event_data)
@@ -163,3 +186,67 @@ def test_buy_event_not_found() -> None:
         "customer_email": "testy@test.com"}
     response = client.post("/tickets", json=ticket_data)
     assert response.status_code == 404
+
+@pytest.mark.usefixtures('test_db_with_event_and_1_ticket_sold')
+def test_delete_ticket() -> None:
+    response = client.delete("/ticket/1")
+    assert response.status_code == 200
+    assert response.content is not None
+    assert response.json().get('id') == 1
+    assert response.json().get('event_id') == 1
+    assert response.json().get('customer_name') == 'Test customer'
+    assert response.json().get('customer_email') == 'test@testy.com'
+
+
+    # check if the ticket is deleted by interrograting the database
+    with TestingSessionLocal() as db:
+        ticket = db.query(Ticket).filter(Ticket.id == 1).first()
+        assert ticket is None
+        event = db.query(Event).filter(Event.id == 1).first()
+        assert event is not None
+        assert event.available_tickets == 100
+
+
+@pytest.mark.usefixtures('test_db_with_event_and_1_ticket_sold')
+def test_delete_event() -> None:
+    response = client.delete("/events/1")
+    content = response.json()
+    assert response.status_code == 200
+    assert response.content is not None
+    assert content.get('id') == 1
+    assert content.get('title') == 'Test event'
+    assert content.get('location') == 'Test location'
+    assert content.get('start_date') == '2025-09-22T12:00:00'
+    assert content.get('end_date') == '2025-09-22T14:00:00'
+
+    # check if the ticket is deleted by interrograting the database
+    with TestingSessionLocal() as db:
+        event = db.query(Event).filter(Event.id == 1).first()
+        assert event is None
+        ticket = db.query(Ticket).filter(Ticket.id == 1).first()
+        assert ticket is None
+
+
+@pytest.mark.usefixtures('test_db_with_event_and_1_ticket_sold')
+def test_update_ticket_name() -> None:
+    ticket_data = {
+        "customer_name": "New name",
+    }
+    response = client.put("/ticket/1", json=ticket_data)
+    content = response.json()
+    assert response.status_code == 200
+    assert response.content is not None
+    assert content.get('id') == 1
+    assert content.get('event_id') == 1
+    assert content.get('customer_name') == 'New name'
+    assert content.get('customer_email') == 'test@testy.com'
+
+    # check if the ticket is updated by interrograting the database
+    with TestingSessionLocal() as db:
+        ticket = db.query(Ticket).filter(Ticket.id == 1).first()
+        assert ticket is not None
+        assert ticket.customer_name == 'New name'
+        assert ticket.customer_email == 'test@testy.com'
+        assert ticket.event_id == 1
+
+
