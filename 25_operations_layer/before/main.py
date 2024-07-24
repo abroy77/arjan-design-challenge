@@ -26,7 +26,7 @@ def get_db():
 # Create event
 @app.post("/events")
 async def create_event(event: EventCreate, database: Session = Depends(get_db)):
-    db_event = Event(**event.model_dump())
+    db_event = Event(**event.dict())
     database.add(db_event)
     database.commit()
     database.refresh(db_event)
@@ -69,7 +69,7 @@ async def book_ticket(ticket: TicketCreate, database: Session = Depends(get_db))
     if event.available_tickets < 1:
         raise HTTPException(status_code=400, detail="No available tickets")
 
-    db_ticket = Ticket(**ticket.model_dump())
+    db_ticket = Ticket(**ticket.dict())
     database.add(db_ticket)
     database.commit()
     database.refresh(db_ticket)
